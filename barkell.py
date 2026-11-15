@@ -2,7 +2,7 @@ import random as rd
 import os
 
 ############
-mode = "bark" #edit this for default mode. modes: bark (default) / system (bash)
+mode = "system" #edit this for default mode. modes: bark (default) / system (bash)
 ############
 
 user = os.environ.get("USER") or 'NOUSER' #Export user of actual shell
@@ -22,11 +22,11 @@ BLOCKMAGENTA = "\033[45m"
 BLOCKCYAN = "\033[46m"
 RESET = "\033[0m"
 PATHCOLOR1 = BLUE + BOLD
-PATHCOLOR2 = MAGENTA + ITALIC
+PATHCOLOR2 = BLUE
 USERCOLOR1 = GREEN + BOLD           # change default prompt colors
-USERCOLOR2 = BLUE                   # when you start the shell.
+USERCOLOR2 = GREEN
 INPUTCOLOR1 = RESET
-INPUTCOLOR2 = RESET
+INPUTCOLOR2 = BLUE
 
 helptxt = { ### Alphabetical commands
     "backdir": "change directory to the back one.",
@@ -83,7 +83,7 @@ def settings():
 
     while True:
         def sel():
-            option = input(f"{YELLOW}Settings{RESET}:\n 1.- {GREEN}Mode{RESET}.\n 2.- {GREEN}System prompt{RESET}.\n 3.- {GREEN}Barkell prompt{RESET}.\n{YELLOW}Option{RESET}: ")
+            option = input(f"{YELLOW}Settings{RESET}:\n 1.- {GREEN}Mode{RESET}.\n 2.- {MAGENTA}System{RESET} prompt.\n 3.- {BLUE}Barkell{RESET} prompt.\n{YELLOW}Option{RESET}: ")
             return option.strip()
         option = sel()
         while option != "1" and option != "2" and option != "3":
@@ -126,7 +126,7 @@ def settings():
                 inputcolor = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
             INPUTCOLOR2 = globals()[inputcolor]
             os.system(f"sed -i 's|^INPUTCOLOR2 = .*|INPUTCOLOR2 = {inputcolor}|' {src}")
-            print(f"{GREEN}Done{RESET}, type {YELLOW}''{RESET} to apply changes.")
+            print(f"{GREEN}Done{RESET}, type {YELLOW}'reload'{RESET} to apply changes.")
 
         elif option == "3":
             usercolor = input(f"{YELLOW}User{RESET} color: ").strip().upper()
