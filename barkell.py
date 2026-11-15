@@ -21,12 +21,13 @@ BLOCKBLUE = "\033[44m"
 BLOCKMAGENTA = "\033[45m"
 BLOCKCYAN = "\033[46m"
 RESET = "\033[0m"
-PATHCOLOR1 = BLUE + BOLD
-PATHCOLOR2 = BLUE
-USERCOLOR1 = GREEN + BOLD           # change default prompt colors
-USERCOLOR2 = GREEN
+WHITE = RESET
+PATHCOLOR1 = BLUE
+PATHCOLOR2 = MAGENTA + ITALIC
+USERCOLOR1 = GREEN                  # change default prompt colors
+USERCOLOR2 = BLUE                   # when you start the shell
 INPUTCOLOR1 = RESET
-INPUTCOLOR2 = BLUE
+INPUTCOLOR2 = RESET
 
 helptxt = { ### Alphabetical commands
     "backdir": "change directory to the back one.",
@@ -78,7 +79,7 @@ def settings():
     global USERCOLOR2
     global INPUTCOLOR1
     global INPUTCOLOR2
-    colors = {"YELLOW","BLUE","RED","MAGENTA","GREEN","CYAN","BOLD"}
+    colors = {"YELLOW","BLUE","RED","MAGENTA","GREEN","CYAN","BOLD","WHITE"}
     src = "~/BarkellPreview/barkell.py"
 
     while True:
