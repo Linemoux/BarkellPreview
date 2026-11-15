@@ -4,11 +4,14 @@
 
 I was made barkell like a *small project* to practice some code, barkell is a command line, a shell where you can type the native linux command or the barkell ones, barkell give you a small list of commands, but you can change the default mode every moment. type 'help' to see the commands barkell give you.
 
+<video src="docs/media/barkell.mp4" controls="width: 100%;"></video>
+
 ## Install
 
 Barkell is a prototype, so it can have some **errors** or **bugs**, i'd love if you bring me your reports or opinion of my project.  Then you can add the python file to your path and to your actual **shell** rc, for example: *.zshrc* | *.bashrc*. 
 
 ```bash
+git clone https://github.com/Linemoux/BarkellPreview
 chmod +x install.sh
 ./install.sh
 ```
