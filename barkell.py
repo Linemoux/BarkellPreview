@@ -21,13 +21,13 @@ BLOCKBLUE = "\033[44m"
 BLOCKMAGENTA = "\033[45m"
 BLOCKCYAN = "\033[46m"
 RESET = "\033[0m"
-WHITE = RESET
+WHITE = "\033[0m"
 PATHCOLOR1 = BLUE
-PATHCOLOR2 = MAGENTA + ITALIC
+PATHCOLOR2 = MAGENTA
 USERCOLOR1 = GREEN                  # change default prompt colors
 USERCOLOR2 = BLUE                   # when you start the shell
-INPUTCOLOR1 = RESET
-INPUTCOLOR2 = RESET
+INPUTCOLOR1 = WHITE
+INPUTCOLOR2 = WHITE
 
 helptxt = { ### Alphabetical commands
     "backdir": "change directory to the back one.",
@@ -80,7 +80,7 @@ def settings():
     global INPUTCOLOR1
     global INPUTCOLOR2
     colors = {"YELLOW","BLUE","RED","MAGENTA","GREEN","CYAN","BOLD","WHITE"}
-    src = "~/BarkellPreview/barkell.py"
+    src = os.path.abspath(__file__)
 
     while True:
         def sel():
@@ -171,8 +171,10 @@ def sysconsole():
     if command == "setmode":
         pass
     elif command == "reload":
-        os.system("python ~/BarkellPreview/barkell.py")
+	abspath = os.path.abspath(__file__)
+        os.system(f"python3 {abspath}")
         exit()
+
     elif command == "settings":
         settings()
     elif command == "setcolors":
@@ -386,7 +388,8 @@ def funciones():
             print(f"{GREEN}Path{RESET}: {allpath}")
 
         elif comando == "reload":
-            os.system("python ~/BarkellPreview/barkell.py")
+	    abspath = os.path.abspath(__file__)
+            os.system(f"python3 {abspath}")
             exit()
 
         elif comando == "rm" or comando == "remove" or comando == "delete" or comando == "dl":
