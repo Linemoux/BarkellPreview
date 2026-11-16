@@ -2,7 +2,7 @@ import random as rd
 import os
 
 ############
-mode = "system" #edit this for default mode. modes: bark (default) / system (bash)
+mode = "bark" #edit this for default mode. modes: bark (default) / system (bash)
 ############
 
 user = os.environ.get("USER") or 'NOUSER' #Export user of actual shell
@@ -84,10 +84,10 @@ def settings():
 
     while True:
         def sel():
-            option = input(f"{YELLOW}Settings{RESET}:\n 1.- {GREEN}Mode{RESET}.\n 2.- {MAGENTA}System{RESET} prompt.\n 3.- {BLUE}Barkell{RESET} prompt.\n{YELLOW}Option{RESET}: ")
+            option = input(f"{YELLOW}Settings{RESET}:\n 1.- {GREEN}Mode{RESET}.\n 2.- {MAGENTA}System{RESET} prompt.\n 3.- {BLUE}Barkell{RESET} prompt.\n 4.- {YELLOW}Quit{RESET} settings.\n{YELLOW}Option{RESET}: ")
             return option.strip()
         option = sel()
-        while option != "1" and option != "2" and option != "3":
+        while option != "1" and option != "2" and option != "3" and option != "4":
             print(f"{BLOCKRED}Error{RESET}: Invalid option, try again.")
             option = sel()
 
@@ -151,6 +151,10 @@ def settings():
             INPUTCOLOR1 = globals()[inputcolor]
             os.system(f"sed -i 's|^INPUTCOLOR1 = .*|INPUTCOLOR1 = {inputcolor}|' {src}")
             print(f"{GREEN}Done{RESET}, type {YELLOW}'reload'{RESET} to apply changes.")
+        
+        elif option == "4":
+            print(f"{GREEN}Done{RESET}.")
+            break
 
         again = input(f"{YELLOW}Quit{RESET} settings? y|n: ").strip().lower()
         if again != "n":
@@ -196,7 +200,7 @@ def setcolor():
     global USERCOLOR2
     global INPUTCOLOR1
     global INPUTCOLOR2
-    colors = {"YELLOW","BLUE","RED","MAGENTA","GREEN","CYAN","BOLD"}
+    colors = {"YELLOW","BLUE","RED","MAGENTA","GREEN","CYAN","WHITE"}
 
     tochange = input(f"{GREEN}Prompts{RESET}:\n 1.- {BLUE}Barkell{RESET} prompt.\n 2.- {MAGENTA}System{RESET} prompt.\n{YELLOW}To change{RESET} 1 | 2: ")
     while tochange != "1" and tochange != "2":
@@ -382,7 +386,7 @@ def funciones():
             print(f"{GREEN}Path{RESET}: {allpath}")
 
         elif comando == "reload":
-            os.system("python ~/Barkell/barkell0_0_9.py")
+            os.system("python ~/BarkellPreview/barkell.py")
             exit()
 
         elif comando == "rm" or comando == "remove" or comando == "delete" or comando == "dl":
@@ -475,7 +479,7 @@ except KeyboardInterrupt:
     if user == 'NOUSER':
         print("Goodbye!")
     else:
-        clrs = ("GREEN","BLUE","MAGENTA","YELLOW","CYAN","RED")
+        clrs = ("GREEN","BLUE","MAGENTA","YELLOW","CYAN","RED",)
         pos = rd.randint(0,5)
         color = clrs[pos]
         cl = globals().get(color)
