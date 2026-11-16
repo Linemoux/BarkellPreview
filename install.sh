@@ -26,4 +26,4 @@ else
 fi
 ABSPATH=$(cd "$(dirname "$0")" && pwd)
 clear && printf '\033[32mDone\033[0m! Welcome to Barkell preview. \033[34mv: 0.1.0\033[0m\ntype \033[33m"help"\033[0m to see available commands. Type \033[32m"barkell"\033[0m in your terminal to start the shell everytime. \033[33mNote\033[0m: Customize your shell typing \033[32m"setcolors"\033[0m, \033[34m"settings"\033[0m or \033[35m"setmode"\033[0m\n.'
-exec "$PY" "$ABSPATH"
+exec "$PY" "$ABSPATH/barkell.py"
