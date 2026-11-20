@@ -120,51 +120,68 @@ def settings():
 			print(f"{GREEN}Done{RESET}, type {YELLOW}'reload'{RESET} to apply changes.")
 
 		elif option == "2":
-			color = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-			while color not in colors and not color == "COLORS":
-				print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+			print(f"Type {YELLOW}'quit'{RESET} to go back.")
+			while True:
 				color = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-			valcolor("USERCOLOR2",color)
+				while color not in colors and not color == "COLORS" and not color == "QUIT":
+					print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+					color = input(f"{YELLOW}User{RESET} color: ").strip().upper()
+				if color == "QUIT":
+					break
+				valcolor("USERCOLOR2",color)
+			if color != "QUIT":
+				while True:
+					color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+					while color not in colors and not color == "COLORS" and not color == "QUIT":
+						print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+						color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+					if color == "QUIT":
+						break
+					valcolor("PATHCOLOR2",color)
 
-			typecolor = PATHCOLOR2
-			color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-			while color not in colors and not color == "COLORS":
-				print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
-				color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-			valcolor("PATHCOLOR2",color)
-
-			color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
-			while color not in colors and not color == "COLORS":
-				print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
-				color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
-			valcolor("INPUTCOLOR2",color)
-			print(f"{GREEN}Done{RESET}, type {YELLOW}'reload'{RESET} to apply changes.")
+				if color != "QUIT":
+					while True:
+						color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
+						while color not in colors and not color == "COLORS":
+							print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+							color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
+						if color == "QUIT":
+							break
+						valcolor("INPUTCOLOR2",color)
+				print(f"{GREEN}Done{RESET}, type {YELLOW}'reload'{RESET} to apply changes.")
 
 		elif option == "3":
-			color = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-			while color not in colors and not color == "COLORS":
-				print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+			print(f"Type {YELLOW}'quit'{RESET} to go back.")
+			while True:
 				color = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-			valcolor("USERCOLOR1",color)
-			
-			color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-			while color not in colors and not color == "COLORS":
-				print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
-				color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-			valcolor("PATHCOLOR1",color)
+				while color not in colors and not color == "COLORS" and not color == "QUIT":
+					print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+					color = input(f"{YELLOW}User{RESET} color: ").strip().upper()
+				valcolor("USERCOLOR1",color)
+			if color != "QUIT":
+				while True:		
+					color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+					while color not in colors and not color == "COLORS":
+						print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+						color = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+					if color == "QUIT":
+						break
+					valcolor("PATHCOLOR1",color)
 
-			color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
-			while color not in colors and not color == "COLORS":
-				print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
-				color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
-			valcolor("INPUTCOLOR1",color)
-			
-			print(f"{GREEN}Done{RESET}, type {YELLOW}'reload'{RESET} to apply changes.")
-		
+				if color != "QUIT":
+					while True:
+						color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
+						while color not in colors and not color == "COLORS":
+							print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+							color = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
+						if color == "QUIT":
+							break
+						valcolor("INPUTCOLOR1",color)
+				print(f"{GREEN}Done{RESET}, type {YELLOW}'reload'{RESET} to apply changes.")
+
 		elif option == "4":
 			print(f"{GREEN}Done{RESET}.")
 			break
-
 		again = input(f"{YELLOW}Quit{RESET} settings? y|n: ").strip().lower()
 		if again != "n":
 			break
@@ -209,9 +226,9 @@ def barkconsole():
 	directory = os.getcwd().replace(os.getenv("HOME", ""), "~", 1)
 
 	if user == 'NOUSER':
-		line = input(f"{BOLD}{BLUE}{directory}{RESET} $ ")
+		line = input(f"{PATHCOLOR1}{directory}{RESET} {INPUTCOLOR1}${RESET} ")
 	else:
-		line = input(f"{USERCOLOR1}{user}{RESET}@{USERCOLOR1}{hostname} {PATHCOLOR1}{directory}{RESET}{INPUTCOLOR1} ${RESET} ")
+		line = input(f"{USERCOLOR1}{user}{RESET}@{USERCOLOR1}{hostname} {PATHCOLOR1}{directory}{RESET} {INPUTCOLOR1}${RESET} ")
 	return line.strip().lower()
 
 def setcolor():
@@ -221,52 +238,59 @@ def setcolor():
 	global USERCOLOR2
 	global INPUTCOLOR1
 	global INPUTCOLOR2
-	colors = {"YELLOW","BLUE","RED","MAGENTA","GREEN","CYAN","WHITE"}
+	colors = {"YELLOW","BLUE","RED","MAGENTA","GREEN","CYAN","BOLD","WHITE","BLOCKRED","BLOCKYELLOW","BLOCKBLUE","BLOCKGREEN","BLOCKMAGENTA","BLOCKCYAN"}
 
-	tochange = input(f"{GREEN}Prompts{RESET}:\n 1.- {BLUE}Barkell{RESET} prompt.\n 2.- {MAGENTA}System{RESET} prompt.\n{YELLOW}To change{RESET} 1 | 2: ")
-	while tochange != "1" and tochange != "2":
+	tochange = input(f"{GREEN}Prompts{RESET}:\n 1.- {BLUE}Barkell{RESET} prompt.\n 2.- {MAGENTA}System{RESET} prompt.\n 3.- {YELLOW}Quit{RESET} setmode.\n{YELLOW}To change{RESET} 1 | 2 | 3: ")
+	while tochange != "1" and tochange != "2" and tochange != "3":
 		print(f"{BLOCKRED}Error{RESET}: Invalid option, try again.")
-		tochange = input(f"{GREEN}Prompts{RESET}:\n 1.- {BLUE}Barkell{RESET} prompt.\n 2.- {MAGENTA}System{RESET} prompt.\n{YELLOW}To change{RESET} 1 | 2: ")
-
+		tochange = input(f"{GREEN}Prompts{RESET}:\n 1.- {BLUE}Barkell{RESET} prompt.\n 2.- {MAGENTA}System{RESET} prompt.\n 3.- {YELLOW}Quit{RESET} setmode.\n{YELLOW}To change{RESET} 1 | 2 | 3: ")
+	if tochange != "3":
+		print(f"type {YELLOW}'quit'{RESET} to go back.")
 	if tochange == "1":
 		usercolor = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-		while usercolor not in colors:
-			print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+		while usercolor not in colors and colors != "QUIT":
+			print(f"{BLOCKRED}Error{RESET}: Invalid input or color not found.")
 			usercolor = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-		USERCOLOR1 = globals()[usercolor]
+		if usercolor != "QUIT":
+			USERCOLOR1 = globals()[usercolor]
 
-		pathcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-		while pathcolor not in colors:
-			print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
 			pathcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-		PATHCOLOR1 = globals()[pathcolor]
-
-		inputcolor = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
-		while inputcolor not in colors:
-			print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
-			inputcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-		INPUTCOLOR1 = globals()[inputcolor]
-		print(f"{GREEN}Applied{RESET}!")
+			while pathcolor not in colors and colors != "QUIT":
+				print(f"{BLOCKRED}Error{RESET}: Invalid input or color not found.")
+				pathcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+			if pathcolor != "QUIT":
+				PATHCOLOR1 = globals()[pathcolor]
+	
+				inputcolor = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
+				while inputcolor not in colors and colors != "QUIT":
+					print(f"{BLOCKRED}Error{RESET}: Invalid input or color not found.")
+					inputcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+				if inputcolor != "QUIT":
+					INPUTCOLOR1 = globals()[inputcolor]
+			print(f"{GREEN}Applied{RESET}!")
 
 	elif tochange == "2":
 		usercolor = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-		while usercolor not in colors:
+		while usercolor not in colors and colors != "QUIT":
 			print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
 			usercolor = input(f"{YELLOW}User{RESET} color: ").strip().upper()
-		USERCOLOR2 = globals()[usercolor]
+		if usercolor != "QUIT":
+			USERCOLOR2 = globals()[usercolor]
 
-		pathcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-		while pathcolor not in colors:
-			print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
 			pathcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-		PATHCOLOR2 = globals()[pathcolor]
-
-		inputcolor = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
-		while inputcolor not in colors:
-			print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
-			inputcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
-		INPUTCOLOR2 = globals()[inputcolor]
-		print(f"{GREEN}Applied{RESET}!")
+			while pathcolor not in colors and colors != "QUIT":
+				print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+				pathcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+			if pathcolor != "QUIT":
+				PATHCOLOR2 = globals()[pathcolor]
+	
+				inputcolor = input(f"{YELLOW}Input{RESET} color: ").strip().upper()
+				while inputcolor not in colors and colors != "QUIT":
+					print(f"{BLOCKRED}Error{RESET}: Invalid color or color not found.")
+					inputcolor = input(f"{YELLOW}Path{RESET} color: ").strip().upper()
+				if pathcolor != "QUIT":
+					INPUTCOLOR2 = globals()[inputcolor]
+			print(f"{GREEN}Applied{RESET}!")
 
 
 def funciones():
@@ -281,16 +305,18 @@ def funciones():
 
 	if comando == "setmode":
 		def sel():
-			select = input(f"{YELLOW}Modes{RESET}:\n 1.- {BLUE}Bark{RESET}: Default mode, default commands.\n 2.- {MAGENTA}System{RESET}: The linux bash default commands.\n{YELLOW}Mode{RESET}: ")
+			select = input(f"{YELLOW}Modes{RESET}:\n 1.- {BLUE}Bark{RESET}: Default mode, default commands.\n 2.- {MAGENTA}System{RESET}: The linux bash default commands.\n 3.- {YELLOW}Quit{RESET}: go back.\n{YELLOW}Mode{RESET}: ").upper()
 			return select.strip()
 		select = sel()
-		while select != "1" and select != "2":
+		while select != "1" and select != "2" and select != "3":
 			print(f"{BLOCKRED}Error{RESET}: Invalid option, try again.")
 			select = sel()
 		if select == "1":
 			mode = "bark"
-		if select == "2":
+		elif select == "2":
 			mode = "system"
+		else:
+			print("",end="\r")
 
 	if mode == "bark":
 		if comando == " " or comando == "":
@@ -465,7 +491,7 @@ def funciones():
 			command = sysconsole()
 
 		elif comando == "showinfo":
-			print(f"{GREEN}.:Barkell:.{RESET}\t{BLUE}v:{RESET} 0.1.1 beta 2")
+			print(f"{GREEN}.:Barkell:.{RESET}\t{BLUE}v:{RESET} 0.1.1")
 			print(f"{YELLOW}Type {RESET}{BLOCKYELLOW}help{RESET}{YELLOW} to see the available commands.{RESET}")
 
 		elif comando == "time" or comando == "whattimeisit" or comando == "whattimeis":
